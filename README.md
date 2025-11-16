@@ -1,4 +1,4 @@
-# 금융상품 시뮬레이션 대시보드 
+# 금융상품 시뮬레이션 대시보드
 
 # Financial Market Simulation Dashboard - Advanced
 
@@ -230,7 +230,7 @@ result = portfolio.stress_test(
 )
 ```
 
-## 📊 개선 사항 (vs 기본 버전)
+## 📊 개선 사항
 
 ### ✅ 해결된 문제
 1. **Streamlit Warning 해결**: `use_container_width` → `width='stretch'`
@@ -298,7 +298,6 @@ result = portfolio.stress_test(
 
 이 프로젝트는 교육 목적으로 개발되었습니다.
 
----
 
 **© 2025 Financial Market Dashboard (Advanced)**
 #   F M _ d a s h 
