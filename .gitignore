@@ -1,0 +1,5 @@
+# key ignore
+secretkey.txt
+
+# venv
+fm2/

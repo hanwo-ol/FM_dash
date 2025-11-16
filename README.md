@@ -76,6 +76,13 @@ pip install -r requirements.txt
 
 > **Note**: FRED API 키가 없어도 샘플 수익률 곡선 데이터로 대시보드를 사용할 수 있습니다.
 
+> 윈도우의 경우에는 아래와 같이 하셔야 합니다.
+
+``` bash 
+$env:FRED_API_KEY = "your_api_key_here"
+
+```
+
 ### 4. 애플리케이션 실행
 
 ```bash
