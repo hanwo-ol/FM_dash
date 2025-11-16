@@ -1,6 +1,7 @@
 # 금융상품 시뮬레이션 대시보드 (석사급)
 # Financial Market Simulation Dashboard - Advanced
 
+
 **석사급 퀄리티**의 금융상품 시뮬레이션 및 포트폴리오 분석 대시보드
 
 ## 🎓 프로젝트 개요
@@ -302,5 +303,6 @@ result = portfolio.stress_test(
 ---
 
 **© 2025 Financial Market Dashboard (Advanced) - 석사급 프로젝트**
-#   F M _ d a s h  
+#   F M _ d a s h 
+ 
  
