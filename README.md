@@ -11,7 +11,7 @@
 
 ### 주요 특징
 
-#### 🔥 고급 기능 구현
+#### 고급 기능 구현
 
 **Phase A: 개별 상품 시뮬레이션 심화**
 - ✅ **채권**: 수익률 곡선 변화 시뮬레이션 (Parallel Shift, Steepening, Flattening)
@@ -31,7 +31,7 @@
 - ✅ 옵션 전략 빌더 (Covered Call, Protective Put, Straddle, Strangle, Bull Call Spread)
 - 🔄 ELS 시뮬레이터 (개발 예정)
 
-### 🛠️ 기술 스택
+### 기술 스택
 
 **데이터 소스:**
 - **yfinance**: Yahoo Finance API
@@ -84,7 +84,7 @@ streamlit run app.py
 
 브라우저가 자동으로 열리며 `http://localhost:8501`에서 대시보드를 확인할 수 있습니다.
 
-## 📂 프로젝트 구조
+## 프로젝트 구조
 
 ```
 Financial_Market_Dashboard_Advanced/
@@ -116,7 +116,7 @@ Financial_Market_Dashboard_Advanced/
     └── dashboards_part3.py        # 포트폴리오 분석
 ```
 
-## 🎯 주요 기능
+## 주요 기능
 
 ### 1. 개별 상품 시뮬레이션
 
@@ -180,7 +180,7 @@ Financial_Market_Dashboard_Advanced/
 - 커스텀 전략 구성
 - 페이오프 다이어그램 시각화
 
-## 🔧 사용 예시
+## 사용 예시
 
 ### 수익률 곡선 시뮬레이션
 
@@ -233,7 +233,7 @@ result = portfolio.stress_test(
 )
 ```
 
-## 📊 개선 사항
+## 개선 사항
 
 ### ✅ 해결된 문제
 1. **Streamlit Warning 해결**: `use_container_width` → `width='stretch'`
@@ -253,7 +253,7 @@ result = portfolio.stress_test(
 - 상관관계 히트맵
 - 스트레스 테스트 시나리오
 
-## 🚀 향후 개발 계획
+## 향후 개발 계획
 
 ### Phase 4 (단기)
 - [ ] 외환 시뮬레이터 (금리평가설, Carry Trade)
@@ -271,7 +271,7 @@ result = portfolio.stress_test(
 - [ ] 머신러닝 기반 예측 모델
 - [ ] 포트폴리오 리밸런싱 최적화
 
-## 📚 참고 자료
+## 참고 자료
 
 **교재:**
 - Valdez, S., & Molyneux, P. (2016). *An Introduction to Global Financial Markets* (8th ed.). Palgrave Macmillan.
@@ -287,7 +287,7 @@ result = portfolio.stress_test(
 - Streamlit: https://streamlit.io
 - Plotly: https://plotly.com/python
 
-## 💡 Troubleshooting
+## Troubleshooting
 
 ### FRED API 오류
 - API 키가 없어도 샘플 데이터로 작동합니다
@@ -297,7 +297,7 @@ result = portfolio.stress_test(
 - 일부 티커는 Yahoo Finance에서 지원하지 않을 수 있습니다
 - 미국 주식 (AAPL, MSFT 등)과 주요 지수 (^GSPC, ^IXIC 등)는 안정적으로 작동합니다
 
-## 📝 라이선스
+## 라이선스
 
 이 프로젝트는 교육 목적으로 개발되었습니다.
 
