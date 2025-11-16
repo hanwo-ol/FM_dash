@@ -1,0 +1,188 @@
+## 주요 기능
+
+### 1. 개별 상품 시뮬레이션
+
+#### 주식
+- Monte Carlo 시뮬레이션 (GBM)
+- VaR (95% 신뢰수준)
+- CVaR (Expected Shortfall)
+
+#### 채권
+- 채권 가격 계산
+- Macaulay Duration
+- **수익률 곡선 변화 시뮬레이션**
+  - Parallel Shift: 모든 만기 동일 변화
+  - Steepening: 장기 금리 상승폭 > 단기
+  - Flattening: 단기 금리 상승폭 > 장기
+
+#### 옵션
+- Black-Scholes 가격 계산
+- Greeks (Delta, Gamma, Vega, Theta, Rho)
+- **페이오프 다이어그램**
+- **옵션 전략 빌더**
+  - Covered Call
+  - Protective Put
+  - Straddle
+  - Strangle
+  - Bull Call Spread
+
+#### 헤지 & 스왑
+- **선물 헤지 시뮬레이션**: 주식 포지션의 선물 헤지 효과
+- **금리 스왑**: 고정금리 vs 변동금리 현금흐름 분석
+
+### 2. 포트폴리오 시뮬레이션
+
+#### 기본 분석
+- 포트폴리오 수익률 & 변동성
+- Sharpe Ratio
+- **Sortino Ratio** (하방 리스크 고려)
+
+#### 리스크 분석
+- **상관관계 히트맵** (Plotly 인터랙티브)
+- Historical VaR
+- Parametric VaR
+- **CVaR (Expected Shortfall)**
+
+#### 최적화
+- 효율적 투자선 (Efficient Frontier)
+- 최대 Sharpe Ratio 포트폴리오
+- 최소 변동성 포트폴리오
+
+#### 스트레스 테스트
+사전 정의된 역사적 위기 시나리오:
+- **2008 금융위기** (주식 -40%)
+- **닷컴 버블** (기술주 -70%)
+- **급격한 금리 인상** (채권 -15%)
+- **블랙 스완 이벤트** (주식 -60%)
+- **COVID-19 팬데믹** (여행 -60%, 기술주 +20%)
+
+### 3. 구조화 상품 빌더
+
+- 옵션 전략 조합
+- 커스텀 전략 구성
+- 페이오프 다이어그램 시각화
+
+## 사용 예시
+
+### 수익률 곡선 시뮬레이션
+
+```python
+from simulations.individual_products import BondPricer
+
+# 기본 수익률 곡선
+base_yields = pd.Series({
+    '1Y': 4.5, '2Y': 4.3, '5Y': 4.2,
+    '10Y': 4.4, '30Y': 4.5
+})
+
+# Steepening (급경사화) 시뮬레이션
+shifted_yields = BondPricer.simulate_yield_curve_shift(
+    base_yields,
+    shift_type='steepening',
+    magnitude=0.01  # 100bp
+)
+```
+
+### 옵션 전략 빌더
+
+```python
+from simulations.individual_products import OptionPricer
+
+# Straddle 전략
+legs = [
+    {'type': 'call', 'K': 100, 'premium': 5, 'position': 'long'},
+    {'type': 'put', 'K': 100, 'premium': 5, 'position': 'long'}
+]
+
+S_range = np.linspace(50, 150, 100)
+payoff = OptionPricer.strategy_payoff(S_range, legs)
+```
+
+### 스트레스 테스트
+
+```python
+from simulations.portfolio import PortfolioSimulator, StressScenarios
+
+portfolio = PortfolioSimulator(returns, weights)
+
+# 2008 금융위기 시나리오
+scenarios = StressScenarios.get_scenarios()
+crisis_scenario = scenarios['2008_financial_crisis']
+
+result = portfolio.stress_test(
+    crisis_scenario['name'],
+    shock_magnitudes=[-0.40] * n_assets
+)
+```
+
+## 개선 사항
+
+### ✅ 해결된 문제
+1. **Streamlit Warning 해결**: `use_container_width` → `width='stretch'`
+2. **FRED API 통합**: 실제 수익률 곡선 데이터
+3. **고급 리스크 지표**: CVaR, Sortino Ratio 추가
+4. **상관관계 분석**: 히트맵 시각화
+5. **스트레스 테스트**: 5가지 역사적 시나리오
+6. **옵션 전략 빌더**: 6가지 사전 정의 전략
+7. **헤지 시뮬레이터**: 선물 헤지 효과 분석
+8. **금리 스왑 분석**: 현금흐름 시뮬레이션
+
+### 🆕 추가된 기능
+- 수익률 곡선 변화 시뮬레이션 (Parallel, Steepening, Flattening)
+- 옵션 페이오프 다이어그램
+- Sortino Ratio (하방 리스크 조정 수익률)
+- CVaR (Expected Shortfall)
+- 상관관계 히트맵
+- 스트레스 테스트 시나리오
+
+## 향후 개발 계획
+
+### Phase 4 (단기)
+- [ ] 외환 시뮬레이터 (금리평가설, Carry Trade)
+- [ ] Binomial Tree 옵션 가격 모델
+- [ ] 내재변동성 (Implied Volatility) 계산
+
+### Phase 5 (중기)
+- [ ] ELS 시뮬레이터 (넉인 배리어, 조기상환)
+- [ ] Exotic 옵션 (Asian, Barrier, Rainbow)
+- [ ] Credit Default Swap (CDS) 시뮬레이터
+
+### Phase 6 (장기)
+- [ ] 백테스팅 엔진
+- [ ] 실시간 데이터 스트리밍
+- [ ] 머신러닝 기반 예측 모델
+- [ ] 포트폴리오 리밸런싱 최적화
+
+## 참고 자료
+
+**교재:**
+- Valdez, S., & Molyneux, P. (2016). *An Introduction to Global Financial Markets* (8th ed.). Palgrave Macmillan.
+
+**금융 모델:**
+- Black, F., & Scholes, M. (1973). The Pricing of Options and Corporate Liabilities. *Journal of Political Economy*.
+- Markowitz, H. (1952). Portfolio Selection. *The Journal of Finance*.
+- Hull, J. C. (2018). *Options, Futures, and Other Derivatives* (10th ed.). Pearson.
+
+**라이브러리:**
+- yfinance: https://github.com/ranaroussi/yfinance
+- FRED API: https://fred.stlouisfed.org/docs/api/
+- Streamlit: https://streamlit.io
+- Plotly: https://plotly.com/python
+
+## Troubleshooting
+
+### FRED API 오류
+- API 키가 없어도 샘플 데이터로 작동합니다
+- 정식 수익률 곡선 데이터가 필요하면 FRED API 키를 발급받으세요
+
+### yfinance 데이터 오류
+- 일부 티커는 Yahoo Finance에서 지원하지 않을 수 있습니다
+- 미국 주식 (AAPL, MSFT 등)과 주요 지수 (^GSPC, ^IXIC 등)는 안정적으로 작동합니다
+
+## 라이선스
+
+이 프로젝트는 교육 목적으로 개발되었습니다.
+
+
+**© 2025 Financial Market Dashboard (Advanced)**
+#
